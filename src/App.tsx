@@ -1,7 +1,8 @@
 import './App.scss'
 import Button from './Components/Button/Button'
 import Divider from './Components/Divider/Divider'
-import EmptyMessage from './Components/EmptyMessage/EmptyMessage'
+import Results from './Components/Results/Results'
+// import EmptyMessage from './Components/EmptyMessage/EmptyMessage'
 import Textarea from './Components/Textarea/Textarea'
 
 const App = () => {
@@ -17,7 +18,8 @@ const App = () => {
         <Button />
       </form>
     <Divider />
-    <EmptyMessage />
+    <Results />
+    {/* <EmptyMessage /> */}
     </div>
   )
 }

@@ -1,0 +1,38 @@
+.card {
+  display: flex;
+  padding: 0.5rem;
+  height: 88px;
+  border: 1px solid var(--black);
+  border-radius: 2px;
+  .colors {
+    flex: 1;
+    .colorA,
+    .colorB {
+      display: flex;
+      div {
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 0.5px solid var(--black);
+        border-radius: 2px;
+    }
+    p {
+      font-family: "Roboto Mono";
+    }
+    }
+  }
+
+  .result {
+    flex: 1;
+    .preview {
+      height: 40px;
+      border: 0.5px solid var(--black);
+      border-radius: 2px;
+      p {
+        text-align: center;
+      }
+    }
+    .contrastRatio {
+      text-align: center;
+    }
+  }
+}
