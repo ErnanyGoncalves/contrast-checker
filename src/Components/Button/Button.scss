@@ -8,4 +8,10 @@ button{
     height: 3rem;
     cursor: pointer;
     border-radius: 2px;
+
+    &:disabled{
+        cursor: not-allowed;
+        background-color: var(--gray);
+        border: 1px solid var(--gray);
+    }
 }

@@ -19,6 +19,7 @@ const App = () => {
     setListOfResults(results)
     setTextareaValue("");
   }
+
   return (
     <div className='app'>
       <h1>Contrast checker</h1>
@@ -28,8 +29,8 @@ const App = () => {
         <Button isDisabled={textareaValue===""} />
       </form>
     <Divider />
-    {listOfResults.length === 0 &&<EmptyMessage />}
-    {listOfResults.length > 0 && <Results results={listOfResults} />}
+    {listOfResults.length === 1 &&<EmptyMessage />}
+    {listOfResults.length > 1 && <Results results={listOfResults} />}
     </div>
   )
 }
