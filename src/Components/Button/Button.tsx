@@ -2,9 +2,9 @@ import React from 'react'
 
 import "./Button.scss"
 
-const Button = () => {
+const Button = ({isDisabled}:any) => {
   return (
-    <button type="submit">CHECK CONTRAST</button>
+    <button type="submit" disabled={isDisabled}>CHECK CONTRAST</button>
   )
 }
 
