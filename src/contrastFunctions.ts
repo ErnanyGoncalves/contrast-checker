@@ -45,7 +45,7 @@ export const getResults = (pairs: object[]) => {
     );
     results.push({
       colors: [pair[0], pair[1]],
-      ratio,
+      ratio: ratio.toFixed(2),
       tests: {
         aaNormal: ratio >= 4.5,
         aaLarge: ratio >= 3,

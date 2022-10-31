@@ -1,38 +1,60 @@
 .card {
-  display: flex;
   padding: 0.5rem;
-  height: 88px;
   border: 1px solid var(--black);
   border-radius: 2px;
-  .colors {
-    flex: 1;
-    .colorA,
-    .colorB {
-      display: flex;
-      div {
-        width: 1.5rem;
-        height: 1.5rem;
-        border: 0.5px solid var(--black);
-        border-radius: 2px;
+  display: grid;
+  gap: 0.5rem;
+  grid-template:
+    "colorA preview controllerA" 44px
+    "colorB contrastRatio controllerA" 44px
+    / 1fr 2fr 0.5fr;
+  align-items: center;
+  .colorA {
+    grid-area: colorA;
+  }
+  .colorB {
+    grid-area: colorB;
+  }
+
+  .colorA,
+  .colorB {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div {
+      height: 1.5rem;
+      width: 1.5rem;
+      border: 0.5px solid var(--black);
+      border-radius: 2px;      
     }
     p {
       font-family: "Roboto Mono";
     }
+  }
+  .preview {
+    grid-area: preview;
+    border: 0.5px solid var(--black);
+    border-radius: 2px;
+    height: 40px;
+    p {
+      text-align: center;
+      font-size: 1.125rem;
+      line-height: 39px;
     }
+  }
+  .contrastRatio {
+    grid-area: contrastRatio;
+    text-align: center;
+    align-items: center;
   }
 
-  .result {
-    flex: 1;
-    .preview {
-      height: 40px;
-      border: 0.5px solid var(--black);
-      border-radius: 2px;
-      p {
-        text-align: center;
-      }
-    }
-    .contrastRatio {
-      text-align: center;
-    }
+  .controllerA {
+    grid-area: controllerA;
+    height: 100%;
+    background-color: var(--light-gray);
+    border: 1px solid var(--black);
+    border-radius: 2px;
+    cursor: pointer;
   }
+  
 }
