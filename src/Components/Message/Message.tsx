@@ -1,13 +1,16 @@
-import React from 'react'
+import React from "react";
 
-import "./Message.scss"
+import "./Message.scss";
 
-const Message = ({msg}:any) => {
+const Message = ({ msg, error }: any | null) => {
   return (
-    <div className='msg'>
-      <p>{msg}</p>       
+    <div className={`${msg && "msg"} ${error && "error"}`}>
+      <p>
+        {msg}
+        {error}
+      </p>
     </div>
-  )
-}
+  );
+};
 
-export default Message
+export default Message;
