@@ -13,20 +13,23 @@ import Message from "./Components/Message/Message";
 
 const App = () => {
   const [textareaValue, setTextareaValue] = useState("");
-  const [listOfResults, setListOfResults] = useState([{ empty: true }]);
+  const [results, setResults] = useState([{}]);
 
   const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const colors = prepareArrayOfColors(
-      textareaValue.replace(/(\t|\s|\n)*/g, "")
-    );
-    const pairs = createPairsOfColors(colors);
-    const results = getResults(pairs).filter(
-      ({ tests }: any) => tests.aaNormal && tests.aaLarge
-    );
-    console.log(results);
-    setListOfResults(results);
-    setTextareaValue("");
+    const taValue = textareaValue.replace(/(\t|\s|\n)*/g, "");
+
+    if (taValue.match(/^(#[A-Fa-f0-9]{6},?)*$/g)) {
+      const colors = prepareArrayOfColors(taValue);
+      const pairs = createPairsOfColors(colors);
+      setResults(getResults(pairs));
+      setTextareaValue("");
+    }else{
+      /**
+       *  Exibir mensagem de input incorreto
+       */
+      console.log("OPA")
+    }
   };
 
   return (
@@ -41,16 +44,13 @@ const App = () => {
         <Button isDisabled={textareaValue === ""} />
       </form>
       <Divider />
-      {listOfResults.length === 1 && listOfResults[0].hasOwnProperty("empty") && (
+      {(Object.keys(results[0]).length === 0 || results.length === 0) && (
         <Message msg={"No colors checked at the moment."} />
       )}
-      {listOfResults.length === 0  && (
-        <Message
-          msg={"None of its colors met the specified accessibility criteria."}
-        />
-      )}
 
-      {listOfResults.length > 0 && !listOfResults[0].hasOwnProperty("empty") && <Results results={listOfResults} />}
+      {Object.keys(results[0]).length !== 0 && results.length > 0 && (
+        <Results results={results} />
+      )}
     </div>
   );
 };

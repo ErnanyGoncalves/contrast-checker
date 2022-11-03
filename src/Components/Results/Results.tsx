@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { getAAAResults, getAAResults } from "../../contrastFunctions";
+import Message from "../Message/Message";
 import ResultCard from "./ResultCard/ResultCard";
 import "./Results.scss";
 
 const Results = ({ results }: any) => {
   const [checked, setChecked] = useState(false);
+  const [listOfResults, setListOfResults] = useState([{}]);
+  useEffect(() => {
+    if (!checked) {
+      setListOfResults(getAAResults(results));
+    } else {
+      setListOfResults(getAAAResults(results));
+    }
+  }, [results,checked]);
 
   return (
     <>
@@ -25,16 +35,18 @@ const Results = ({ results }: any) => {
           <span style={{ color: checked ? "#000000" : "#919191" }}>AAA</span>
         </div>
       </label>
-      <div className="grid">
-        {results
-          .filter(
-            ({ tests }: any) => checked ? tests.aaaNormal && tests.aaaLarge : true
-          )
-          .sort((a: any, b: any) => b.ratio - a.ratio)
-          .map((v: any, i: number) => (
+
+      {listOfResults.length > 0 ? (
+        <div className="grid">
+          {listOfResults.map((v: any, i: number) => (
             <ResultCard key={i} colors={v.colors} ratio={v.ratio} />
           ))}
-      </div>
+        </div>
+      ) : (
+        <Message
+          msg={"None of its colors met the specified accessibility criteria."}
+        />
+      )}
     </>
   );
 };

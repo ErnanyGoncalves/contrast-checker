@@ -20,7 +20,7 @@ const ResultCard = ({ colors, ratio }: any) => {
           <p style={{ color: colors[1-i] }}>Text</p>
         </div>
         <p className="contrastRatio">{ratio} : 1</p>
-        <button className="controllerA" onClick={()=>setI(i===0?1:0)}>S</button>
+        <button className="controllerA" onClick={()=>setI(i===0?1:0)}></button>
       </div>
     )
   );

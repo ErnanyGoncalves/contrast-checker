@@ -1,4 +1,5 @@
-export const prepareArrayOfColors = (textareaValue:string) => textareaValue.split(",");
+export const prepareArrayOfColors = (textareaValue: string) =>
+  textareaValue.split(",");
 
 export const createPairsOfColors = (colors: string[]) => {
   const pairs: string[][] = [];
@@ -34,8 +35,6 @@ const calculateRatio = (textColor: number, backColor: number) =>
   (Math.max(textColor, backColor) + 0.05) /
   (Math.min(textColor, backColor) + 0.05);
 
-
-
 export const getResults = (pairs: object[]) => {
   const results: object[] = [];
   pairs.forEach((pair: any) => {
@@ -55,10 +54,14 @@ export const getResults = (pairs: object[]) => {
     });
   });
 
-  return results;
+  return results.sort((a: any, b: any) => b.ratio - a.ratio);
 };
-
-
 
 export const onlyUnique = (value: any, index: number, self: any) =>
   self.indexOf(value) === index;
+
+export const getAAResults = (results: object[]) =>
+  results.filter(({ tests }: any) => tests.aaNormal && tests.aaLarge);
+
+export const getAAAResults = (results: object[]) =>
+  results.filter(({ tests }: any) => tests.aaaNormal && tests.aaaLarge);

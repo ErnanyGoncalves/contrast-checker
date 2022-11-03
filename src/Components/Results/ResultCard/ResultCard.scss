@@ -54,7 +54,11 @@
 
   .controllerA {
     grid-area: controllerA;
-    background-color: var(--light-gray);
+    background-color: var(--white);
+    background-image: url(src/assets/refresh.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25px 25px;
     border: 1px solid var(--black);
     border-radius: 2px;
     cursor: pointer;
