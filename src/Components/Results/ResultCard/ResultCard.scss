@@ -29,6 +29,7 @@
     }
     p {
       font-family: "Roboto Mono";
+      text-transform: uppercase;
     }
   }
   .preview {
@@ -43,7 +44,7 @@
       font-size: 1.125rem;
       line-height: 39px;
       -webkit-transition: 0.4s;
-      transition: 0.4s;
+      transition: 0.4s;      
     }
   }
   .contrastRatio {
