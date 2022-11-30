@@ -8,12 +8,19 @@ import {
   createPairsOfColors,
   getResults,
   prepareArrayOfColors,
-} from "./contrastFunctions";
+} from "./utils/contrastFunctions";
 import Message from "./Components/Message/Message";
+import useContrastStore from "./hooks/useContrastStore";
 
 const App = () => {
   const [textareaValue, setTextareaValue] = useState("");
-  const [results, setResults] = useState([{}]);
+
+  const results = useContrastStore((state: { results: any }) => state.results);
+  const setResults = useContrastStore(
+    (state: { setResults: any }) => state.setResults
+  );
+
+  // const [results, setResults] = useState([{}]);
   const [isInputCorrect, setIsInputCorrect] = useState(true);
 
   const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
@@ -22,9 +29,9 @@ const App = () => {
 
     if (taValue.match(/^(#[A-Fa-f0-9]{6},?)*$/g)) {
       setIsInputCorrect(true);
-      const colors = prepareArrayOfColors(taValue);
-      const pairs = createPairsOfColors(colors);
-      setResults(getResults(pairs));
+
+      setResults(taValue);
+      // setResults(getResults(pairs));
       setTextareaValue("");
     } else {
       setIsInputCorrect(false);
@@ -46,11 +53,13 @@ const App = () => {
         <Message error={"Something is not right at the input."} />
       )}
       <Divider />
-      {(Object.keys(results[0]).length === 0 || results.length === 0) && (
+      {/* {(Object.keys(results[0]).length === 0 || results.length === 0) && ( */}
+      {results.length === 0 && (
         <Message msg={"No colors checked at the moment."} />
       )}
 
-      {Object.keys(results[0]).length !== 0 && results.length > 0 && (
+      {results.length > 0 && (
+        // {Object.keys(results[0]).length !== 0 && results.length > 0 && (
         <Results results={results} />
       )}
     </div>

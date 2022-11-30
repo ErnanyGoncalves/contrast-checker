@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAAAResults, getAAResults } from "../../contrastFunctions";
+import { getAAAResults, getAAResults } from "../../utils/contrastFunctions";
 import Message from "../Message/Message";
 import ResultCard from "./ResultCard/ResultCard";
 import "./Results.scss";
