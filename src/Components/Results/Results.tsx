@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { getAAAResults, getAAResults } from "../../utils/contrastFunctions";
+import React, { useEffect } from "react";
+import useContrastStore from "../../hooks/useContrastStore";
 import Message from "../Message/Message";
 import ResultCard from "./ResultCard/ResultCard";
 import "./Results.scss";
 
 const Results = ({ results }: any) => {
-  const [checked, setChecked] = useState(false);
-  const [listOfResults, setListOfResults] = useState([{}]);
+
+  const filteredResults = useContrastStore((state: { filteredResults: any }) => state.filteredResults);
+  const criteria = useContrastStore((state: { criteria: any }) => state.criteria);
+
+  const changeCriteriaFilter = useContrastStore(
+    (state: { changeCriteriaFilter: any }) => state.changeCriteriaFilter
+  );
+  const setFilteredResults = useContrastStore(
+    (state: { setFilteredResults: any }) => state.setFilteredResults
+  );
+
   useEffect(() => {
-    if (!checked) {
-      setListOfResults(getAAResults(results));
-    } else {
-      setListOfResults(getAAAResults(results));
-    }
-  }, [results,checked]);
+    setFilteredResults(results)
+  }, [results,criteria]);
 
   return (
     <>
@@ -21,24 +26,24 @@ const Results = ({ results }: any) => {
       <label className="switchLabel" htmlFor="switch">
         Criteria
         <div>
-          <span style={{ color: !checked ? "#000000" : "#919191" }}>AA</span>
+          <span style={{ color: criteria ==="AA" ? "#000000" : "#919191" }}>AA</span>
           <div className="switch">
             <input
               type="checkbox"
               name="criteria"
               id="switch"
-              checked={checked}
-              onChange={() => setChecked(!checked)}
+              checked={criteria !== "AA"}
+              onChange={changeCriteriaFilter}
             />
             <span className="slider"></span>
           </div>
-          <span style={{ color: checked ? "#000000" : "#919191" }}>AAA</span>
+          <span style={{ color: criteria === "AAA" ? "#000000" : "#919191" }}>AAA</span>
         </div>
       </label>
 
-      {listOfResults.length > 0 ? (
+      {filteredResults.length > 0 ? (
         <div className="grid">
-          {listOfResults.map((v: any, i: number) => (
+          {filteredResults.map((v: any, i: number) => (
             <ResultCard key={i} colors={v.colors} ratio={v.ratio} />
           ))}
         </div>

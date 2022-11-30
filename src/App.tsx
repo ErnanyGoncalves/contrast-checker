@@ -4,11 +4,6 @@ import Button from "./Components/Button/Button";
 import Divider from "./Components/Divider/Divider";
 import Results from "./Components/Results/Results";
 import Textarea from "./Components/Textarea/Textarea";
-import {
-  createPairsOfColors,
-  getResults,
-  prepareArrayOfColors,
-} from "./utils/contrastFunctions";
 import Message from "./Components/Message/Message";
 import useContrastStore from "./hooks/useContrastStore";
 
@@ -20,7 +15,6 @@ const App = () => {
     (state: { setResults: any }) => state.setResults
   );
 
-  // const [results, setResults] = useState([{}]);
   const [isInputCorrect, setIsInputCorrect] = useState(true);
 
   const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
@@ -31,7 +25,6 @@ const App = () => {
       setIsInputCorrect(true);
 
       setResults(taValue);
-      // setResults(getResults(pairs));
       setTextareaValue("");
     } else {
       setIsInputCorrect(false);
@@ -53,13 +46,11 @@ const App = () => {
         <Message error={"Something is not right at the input."} />
       )}
       <Divider />
-      {/* {(Object.keys(results[0]).length === 0 || results.length === 0) && ( */}
       {results.length === 0 && (
         <Message msg={"No colors checked at the moment."} />
       )}
 
       {results.length > 0 && (
-        // {Object.keys(results[0]).length !== 0 && results.length > 0 && (
         <Results results={results} />
       )}
     </div>

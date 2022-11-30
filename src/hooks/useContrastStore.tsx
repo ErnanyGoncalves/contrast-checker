@@ -1,6 +1,6 @@
 import create from "zustand";
 import {
-    createPairsOfColors,
+  createPairsOfColors,
   getAAAResults,
   getAAResults,
   getResults,
@@ -8,7 +8,7 @@ import {
   prepareArrayOfColors,
 } from "../utils/contrastFunctions";
 
-const useContrastStore = create<any>((set:any) => ({
+const useContrastStore = create<any>((set: any) => ({
   isLoading: false,
   results: [],
   filteredResults: [],
@@ -19,19 +19,21 @@ const useContrastStore = create<any>((set:any) => ({
       const colors = prepareArrayOfColors(input);
       const pairs = createPairsOfColors(colors);
       return {
-        results: getResults(pairs)
-      }
+        results: getResults(pairs),
+      };
     }),
-  setFilteredResults: () =>
-    set((state:any) => ({
-      filtered: state.criteria === "AA" ? getAAResults(state.results) : getAAAResults(state.results)
+  setFilteredResults: (results: any[]) =>
+    set((state: any) => ({
+      filteredResults:
+        state.criteria === "AA"
+          ? getAAResults(results)
+          : getAAAResults(results),
     })),
   setColors: () =>
-    set((state:any) => ({ colors: state.filteredResults.filter(onlyUnique) })),
+    set((state: any) => ({ colors: state.filteredResults.filter(onlyUnique) })),
   changeCriteriaFilter: () =>
-    set((state:any) => ({ criteria: state.criteria === "AA" ? "AAA" : "AA" })),
-  loading: () => set((state:any) => ({ isLoading: !state.isLoading })),
+    set((state: any) => ({ criteria: state.criteria === "AA" ? "AAA" : "AA" })),
+  loading: () => set((state: any) => ({ isLoading: !state.isLoading })),
 }));
-
 
 export default useContrastStore;
