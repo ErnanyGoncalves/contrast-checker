@@ -19,15 +19,16 @@ const App = () => {
 
   const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const taValue = textareaValue.replace(/(\t|\s|\n)*/g, "");
-
-    if (taValue.match(/^(#[A-Fa-f0-9]{6},?)*$/g)) {
+    const taValue = textareaValue.trim().replace(/(\t|\n)*/g, "").replace(/(\s+;\s*|\s*;\s+|\s+,\s*|\s*,\s+|\s\s+)/g," ");
+    console.log(taValue)
+    if (taValue.match(/^(#[A-Fa-f0-9]{6}[,\s;])(#[A-Fa-f0-9]{6}[,\s;]?)+$/g)) { 
       setIsInputCorrect(true);
-
-      setResults(taValue);
-      setTextareaValue("");
+      console.log("OK");
+      // setResults(taValue);
+      // setTextareaValue("");
     } else {
       setIsInputCorrect(false);
+      console.log("NÃO OK");
     }
   };
 

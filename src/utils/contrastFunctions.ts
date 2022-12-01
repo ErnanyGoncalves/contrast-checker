@@ -1,5 +1,5 @@
 export const prepareArrayOfColors = (textareaValue: string) =>
-  textareaValue.split(",");
+  textareaValue.split(/[,\s;]/);
 
 export const createPairsOfColors = (colors: string[]) => {
   const pairs: string[][] = [];

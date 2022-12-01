@@ -8,7 +8,6 @@ const Results = ({ results }: any) => {
 
   const filteredResults = useContrastStore((state: { filteredResults: any }) => state.filteredResults);
   const criteria = useContrastStore((state: { criteria: any }) => state.criteria);
-
   const changeCriteriaFilter = useContrastStore(
     (state: { changeCriteriaFilter: any }) => state.changeCriteriaFilter
   );
@@ -16,6 +15,8 @@ const Results = ({ results }: any) => {
     (state: { setFilteredResults: any }) => state.setFilteredResults
   );
 
+  // Tentar eliminar use effect
+  // Incluir função de setFilteredResults na funcao do changeCriteriaFilter
   useEffect(() => {
     setFilteredResults(results)
   }, [results,criteria]);
