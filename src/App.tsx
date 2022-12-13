@@ -19,8 +19,12 @@ const App = () => {
 
   const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const taValue = textareaValue.trim().replace(/(\t|\n)*/g, "").replace(/(\s+;\s*|\s*;\s+|\s+,\s*|\s*,\s+|\s\s+)/g," ");
-    if (taValue.match(/^(#[A-Fa-f0-9]{6}[,\s;])(#[A-Fa-f0-9]{6}[,\s;]?)+$/g)) { 
+    const taValue = textareaValue
+      .trim()
+      .replace(/[\n|;|,]/g, " ")
+      .replace(/(\s\s+)/g, " ");
+
+    if (taValue.match(/^(#[A-Fa-f0-9]{6}\s)(#[A-Fa-f0-9]{6}\s?)+$/g)) {
       setIsInputCorrect(true);
       setResults(taValue);
       setTextareaValue("");
@@ -48,9 +52,7 @@ const App = () => {
         <Message msg={"No colors checked at the moment."} />
       )}
 
-      {results.length > 0 && (
-        <Results results={results} />
-      )}
+      {results.length > 0 && <Results results={results} />}
     </div>
   );
 };
