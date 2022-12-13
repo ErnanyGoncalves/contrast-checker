@@ -21,7 +21,7 @@ const App = () => {
     ev.preventDefault();
     const taValue = textareaValue
       .trim()
-      .replace(/[\n|;|,]/g, " ")
+      .replace(/[\n;,]/g, " ")
       .replace(/(\s\s+)/g, " ");
 
     if (taValue.match(/^(#[A-Fa-f0-9]{6}\s)(#[A-Fa-f0-9]{6}\s?)+$/g)) {
